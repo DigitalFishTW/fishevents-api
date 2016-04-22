@@ -4,17 +4,17 @@
 ####Request
 ```
 {
-  login,
-  hashed_password
+  username,
+  password
 }
 ```
 
 ####Response
 ```
 HTTP Code
-  - 200
-  - 403
-  - 500
+  - 201 Created
+  - 226 IM Used
+  - 500 Internal Server Error
 ```
 
 ##Login
@@ -22,37 +22,37 @@ HTTP Code
 ####Request
 ```
 {
-  login,
-  hashed_password
+  username,
+  password
 }
 ```
 
 ####Response
 ```
 HTTP Code
-  - 200
-  - 403
-  - 500
+  - 200 Found
+  - 403 Forbidden
+  - 500 Internal Server Error
 {
   token
 }
 ```
 
 ##Update Password
-###**PATCH** /auth/:login/:hashed_password
+###**PATCH** /auth/:username/:password
 ####Request
 ```
 [
-  { "op": "replace", "path": "/hashed_password", "value": "pw" }
+  { "op": "replace", "path": "/password", "value": "pw" }
 ]
 ```
 
 ####Response
 ```
 HTTP Code
-  - 200
-  - 403
-  - 500
+  - 200 Found
+  - 403 Forbidden
+  - 500 Internal Server Error
 ```
 
 
@@ -81,6 +81,14 @@ HTTP Code
 }
 ```
 
+####Response
+```
+HTTP Code
+  - 201 Created
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
 ##Get profile list
 ###**GET** /profile
 ```
@@ -93,6 +101,10 @@ HTTP Code
 
 
 ```
+HTTP Code
+  - 200 Found
+  - 403 Forbidden
+  - 500 Internal Server Error
 {
   [
     {id, first_name, middle_name, last_name, [field]},
@@ -125,6 +137,14 @@ HTTP Code
   licenses: [license_id1, license_id2, license_id3...]
   phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
 }
+```
+
+####Response
+```
+HTTP Code
+  - 200 Found
+  - 403 Forbidden
+  - 500 Internal Server Error
 ```
 
 ##Modify profile
