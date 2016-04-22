@@ -8,9 +8,11 @@ var bodyParser = require('body-parser');
 const Account = require("./models/account");
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy;
+const Session = require("./models/session");
 
-const routes = require('./routes/index');
+// Load routes
 const auth = require("./routes/auth");
+const profile = require("./routes/profile");
 const config = require("./config");
 
 var app = express();
@@ -37,7 +39,7 @@ config.passport = passport;
 // Passport middleware
 passport.use(new LocalStrategy({
     usernameField: 'username',
-    passwordField: 'hashed_password'
+    passwordField: 'password'
   },
   function(username, password, done) {
     Account.findOne({ username: username }, function (err, user) {
@@ -64,14 +66,29 @@ passport.deserializeUser(function(id, done) {
 });
 
 // CORS
-app.all('/', function(req, res, next) {
+app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
- 
-app.use('/', routes);
-app.use('/auth', auth);
+
+app.use('/auth', auth); 
+
+// token auth for api call
+app.use(function(req, res, next) {
+    Session.findOne({token: req.query.token})
+    .then(function (doc) {
+        if (!doc) {
+            res.status("401").json({});
+        }
+        next();
+    })
+    .catch(function (err) {
+        res.status("500").json({error: err.toString()});
+    })
+});
+
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
