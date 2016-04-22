@@ -5,7 +5,7 @@
 ```
 {
   username,
-  hashed_password
+  password
 }
 ```
 
@@ -23,7 +23,7 @@ HTTP Code
 ```
 {
   username,
-  hashed_password
+  password
 }
 ```
 
@@ -39,11 +39,11 @@ HTTP Code
 ```
 
 ##Update Password
-###**PATCH** /auth/:username/:hashed_password
+###**PATCH** /auth/:username/:password
 ####Request
 ```
 [
-  { "op": "replace", "path": "/hashed_password", "value": "pw" }
+  { "op": "replace", "path": "/password", "value": "pw" }
 ]
 ```
 
