@@ -4,7 +4,7 @@
 ####Request
 ```
 {
-  login,
+  username,
   hashed_password
 }
 ```
@@ -22,7 +22,7 @@ HTTP Code
 ####Request
 ```
 {
-  login,
+  username,
   hashed_password
 }
 ```
@@ -39,7 +39,7 @@ HTTP Code
 ```
 
 ##Update Password
-###**PATCH** /auth/:login/:hashed_password
+###**PATCH** /auth/:username/:hashed_password
 ####Request
 ```
 [
