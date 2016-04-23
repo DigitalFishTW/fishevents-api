@@ -12,6 +12,12 @@ var catchSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: "Permit"
     },
+    water: {
+        temp: Number,
+        deep: Number,
+        salinity: Number,
+        oxygen: Number
+    },
     species: {
         profile: {
             type: Schema.Types.ObjectId,
@@ -20,7 +26,8 @@ var catchSchema = Schema({
         weight: Number,
         sold: Number,
         pricing: Number
-    }
+    },
+    meta: {}
 });
 
 var Catch = mongoose.model('Catch', catchSchema);
