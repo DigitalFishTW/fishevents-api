@@ -1,4 +1,4 @@
-#Login
+#Auth
 ##Register
 ###**PUT** /auth
 ####Request
@@ -14,6 +14,7 @@
 HTTP Code
   - 201 Created
   - 226 IM Used
+  - 400 Bad Request
   - 500 Internal Server Error
 ```
 
@@ -111,17 +112,17 @@ HTTP Code
 ```
 
 ##Get Profile List
-###**GET** /profile?token=&offset=&limit=&fields=[field1,field2,field3...]
+###**GET** /profile?token=&offset=&limit=
 ####Response
 ```
 HTTP Code
   - 200 Found
     {
       [
-        {id, name: {first, middle, last}, type, [field]},
-        {id, name: {first, middle, last}, type, [field]},
+        {Object},
+        {Object},
         ...
-        {id, name: {first, middle, last}, type, [field]}
+        {Object}
       ]
     }
   - 401 Unauthorized
@@ -249,17 +250,17 @@ HTTP Code
 ```
 
 ##Get Vessel List
-###**GET** /vessel?token=&offset=&limit=&fields=[field1,field2,field3...]
+###**GET** /vessel?token=&offset=&limit=
 ####Response
 ```
 HTTP Code
   - 200 Found
     {
       [
-        {id, imo, mmsi, identify, radio, ais_type, [field]},
-        {id, imo, mmsi, identify, radio, ais_type, [field]},
+        {Object},
+        {Object},
         ...
-        {id, imo, mmsi, identify, radio, ais_type, [field]}
+        {Object}
       ]
     }
   - 401 Unauthorized
@@ -296,3 +297,77 @@ HTTP Code
   - 403 Forbidden
   - 500 Internal Server Error
 ```
+
+#Catch
+##Add Catch Record
+###**PUT** /catch?token
+####Resquest
+```
+{
+    total: {
+        weight,
+        counts
+    },
+    selling,
+    permit,
+    species: {
+        profile,
+        weight,
+        sold,
+        pricing
+    }
+}
+```
+
+####Respopnse
+```
+HTTP Code
+  - 201 Created
+  - 400 Bad Request
+  - 500 Internal Server Error
+```
+
+##Get Catch List
+###**GET** /catch?token=&offset=&limit=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {Object},
+        {Object},
+        ...
+        {Object}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Get One Catch Detail
+###**GET** /catch/:id?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      total: {
+        weight,
+        counts
+      },
+      selling,
+      permit,
+      species: {
+        profile,
+        weight,
+        sold,
+        pricing
+      }
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
