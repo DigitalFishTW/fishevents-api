@@ -489,3 +489,79 @@ HTTP Code
   - 403 Forbidden
   - 500 Internal Server Error
 ```
+
+
+#Permit
+##Add Permit
+###**PUT** /permit?token=
+####Request
+```
+{
+  type,
+  country_code,
+  state,
+  id,
+  ...
+}
+```
+
+#Response
+```
+HTTP Code
+  - 201 Created
+  - 400 Bad Request
+  - 500 Internal Server Error
+```
+
+##GET Permit List
+###**GET** /permit?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {Object},
+        {Object},
+        ...
+        {Object}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##GET One Permit
+###**GET** /permit/:id?token=
+####Response
+```
+  - 200 Found
+    {
+      _id,
+      type,
+      country_code,
+      state,
+      id,
+      ...
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Modify permit
+###**PATCH** /permit/:id?token＝
+####Request
+```
+JSON Patch
+```
+
+####Response
+```
+HTTP Code
+  - 200 OK
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
