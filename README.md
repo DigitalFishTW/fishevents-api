@@ -46,11 +46,11 @@ HTTP Code
 ```
 
 ##Update Password
-###**PATCH** /auth/:password?token=
+###**PATCH** /auth/:old_password?token=
 ####Request
 ```
 [
-  { "op": "replace", "path": "/password", "value": "pw" }
+  { "op": "replace", "path": "/password", "value": "new_password" }
 ]
 ```
 
