@@ -18,6 +18,7 @@ const track = require("./routes/track");
 const fishCatch = require("./routes/catch");
 const vessel = require("./routes/vessel");
 const username = require("./routes/username");
+const fish = require("./routes/fish");
 const search = require("./routes/search");
 
 const config = require("./config");
@@ -103,6 +104,7 @@ app.use('/track', track);
 app.use('/catch', fishCatch);
 app.use('/vessel', vessel);
 app.use('/username', username);
+app.use('/fish', fish);
 app.use('/search', search);
 
 

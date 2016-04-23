@@ -62,7 +62,7 @@ exports.put = function(req, res) {
                         .exec();
                 })
                 .then(function() {
-                    res.status(200).json({});
+                    res.status(201).json({});
                 })
                 .catch(function(err) {
                     if(err) {
@@ -143,3 +143,30 @@ exports.patch = function (req, res, next) {
         return res.status('500').json({error: error.stack ? error.stack: error.toString()});
     })
 }
+
+exports.getAll = function(req, res, next) {
+    var query = Profile.find({})
+    
+    query.sort({_id: 1});
+    
+    if (!isNaN(Number(req.query.offset))) {
+        query.skip(Number(req.query.offset))
+    }
+    
+    if (!isNaN(Number(req.query.limit))) {
+        query.limit(Number(req.query.limit))
+    } else {
+        query.limit(25);
+    }
+    
+    
+    query.then(function (docs) {
+        var results = docs.map(function (doc) {
+            return doc.toObject();
+        })
+        res.json(results)
+    })
+    .catch(function (error) {
+        return res.status('500').json({error: error.stack ? error.stack: error.toString()});
+    })
+};
