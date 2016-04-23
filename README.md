@@ -32,7 +32,7 @@ HTTP Code
 ```
 
 ##Get Username
-###**GET** /username
+###**GET** /username?token=
 
 ####Response
 ```
@@ -42,6 +42,15 @@ HTTP Code
       username
     }
   - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Logout
+###**DELETE** /auth?token=
+####Response
+```
+  - 200 Found
+  - 401 Unauthorized
   - 500 Internal Server Error
 ```
 
@@ -219,7 +228,7 @@ HTTP Code
   radio,
   flag,
   ais_type,
-  groo_tinnage,
+  gross_tonnage,
   deadweight,
   length,
   breadth,
@@ -274,7 +283,7 @@ HTTP Code
       radio,
       flag,
       ais_type,
-      groo_tinnage,
+      gross_tonnage,
       deadweight,
       length,
       breadth,
