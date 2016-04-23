@@ -24,11 +24,11 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+    {
+      token
+    }
   - 403 Forbidden
   - 500 Internal Server Error
-{
-  token
-}
 ```
 
 ##Get Username
@@ -38,11 +38,11 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+    {
+      username
+    }
   - 403 Forbidden
   - 500 Internal Server Error
-{
-  username
-}
 ```
 
 ##Update Password
@@ -72,9 +72,11 @@ HTTP Code
 {
   create_time,
   last_edit,
-  first_name,
-  middle_name,
-  last_name,
+  name: {
+    first,
+    middle,
+    last
+  },
   type,
   email,
   zip,
@@ -107,11 +109,43 @@ HTTP Code
   - 200 Found
     {
       [
-        {id, first_name, middle_name, last_name, type, [field]},
-        {id, first_name, middle_name, last_name, type, [field]},
+        {id, name: {first, middle, last}, type, [field]},
+        {id, name: {first, middle, last}, type, [field]},
         ...
-        {id, first_name, middle_name, last_name, type, [field]}
+        {id, name: {first, middle, last}, type, [field]}
       ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Get My Profile
+###**GET** /profile/my?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      create_time,
+      last_edit,
+      name: {
+        first,
+        middle,
+        last
+      },
+      type,
+      email,
+      zip,
+      address,
+      city,
+      states,
+      country_code,
+      birth,
+      gender,
+      bio,
+      licenses: [license_id1, license_id2, license_id3...]
+      phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
     }
   - 401 Unauthorized
   - 403 Forbidden
@@ -127,9 +161,11 @@ HTTP Code
     {
       create_time,
       last_edit,
-      first_name,
-      middle_name,
-      last_name,
+      name: {
+        first,
+        middle,
+        last
+      },
       type,
       email,
       zip,
