@@ -54,7 +54,7 @@ router.put('/', function (req, res, next) {
     var vessel = new Vessel(dataObj);
     vessel.save()
     .then(function (doc) {
-        return res.json(doc);
+        return res.status(201).json(doc);
     })
     .catch(function (error) {
         return res.status('500').json({error: error.toString()});

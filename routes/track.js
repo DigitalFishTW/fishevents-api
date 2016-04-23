@@ -8,7 +8,7 @@ var router = express.Router({caseSensitive: true});
 var mustHave = [
     "boat",
     "path",
-    "catchs",
+    "catches",
     "start_at",
     "end_at"
 ]
@@ -42,7 +42,7 @@ router.put('/', function (req, res, next) {
     var track = new Track(dataObj);
     track.save()
     .then(function (doc) {
-        return res.json(doc);
+        return res.status(201).json(doc);
     })
     .catch(function (error) {
         return res.status('500').json({error: error.toString()});

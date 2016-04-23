@@ -2,10 +2,12 @@ var mongoose = require("mongoose");
 var trackSchema = mongoose.Schema({
     boat: mongoose.Schema.Types.ObjectId,
     path: [{
+        time: Date,
         lat: Number,
-        long: Number
+        long: Number,
+        speed: Number
     }],
-    "catchs": [
+    catches: [
         mongoose.Schema.Types.ObjectId
     ],
     start_at: Date,

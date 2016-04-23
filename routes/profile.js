@@ -5,7 +5,7 @@ const router = express.Router({caseSensitive: true});
 const profileController = require("../controllers/profileController");
 
 router.put('/', profileController.put);
-router.get('/:id', profileController.get);
+router.get('/my', profileController.getMy);
 router.patch('/', profileController.patch);
 
 module.exports = router;

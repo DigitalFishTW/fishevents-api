@@ -13,7 +13,7 @@ const Session = require("./models/session");
 // Load routes
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
-const permit = require("./routes/license");
+const permit = require("./routes/permit");
 const track = require("./routes/track");
 const fishCatch = require("./routes/catch");
 const vessel = require("./routes/vessel");

@@ -77,17 +77,23 @@ exports.put = function(req, res) {
         });
 };
 
-exports.get = function(req, res) {
-    Profile
-        .findById(req.params.id)
+exports.getMy = function(req, res) {
+    Session
+        .findOne({
+            token: req.query.token
+        })
+        .then(function(session) {
+            return Profile
+                .findOne({
+                    username: session.username
+                });
+        })
         .then(function(profile) {
             res.status(200).json(profile);
         })
         .catch(function(err) {
-            if(err) {
-                res.status(500).json({ err: err.toString() });
-            }
-        })
+            res.status(500).json({ err: err.toString() });
+        });
 };
 
 exports.patch = function (req, res, next) {

@@ -41,7 +41,7 @@ router.put('/', function (req, res, next) {
     var permit = new Permit(dataObj);
     permit.save()
     .then(function (doc) {
-        return res.json(doc);
+        return res.status(201).json(doc);
     })
     .catch(function (error) {
         return res.status('500').json({error: error.toString()});
