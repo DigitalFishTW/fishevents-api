@@ -67,7 +67,7 @@ HTTP Code
 ####Response
 ```
 HTTP Code
-  - 200 Found
+  - 200 OK
   - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
@@ -137,6 +137,7 @@ HTTP Code
 HTTP Code
   - 200 Found
     {
+      _id,
       create_time,
       last_edit,
       name: {
@@ -169,6 +170,7 @@ HTTP Code
 HTTP Code
   - 200 Found
     {
+      _id,
       create_time,
       last_edit,
       name: {
@@ -198,21 +200,18 @@ HTTP Code
 ###**PATCH** /profile/:id?token＝
 ####Request
 ```
-[
-  { "op": "replace", "path": "/baz", "value": "boo" },
-  { "op": "add", "path": "/hello", "value": ["world"] },
-  { "op": "remove", "path": "/foo"}
-]
+JSON Patch
 ```
 
 ####Response
 ```
 HTTP Code
-  - 200 Found
+  - 200 OK
   - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
+
 
 #Vessel
 ##Add New Vessel
@@ -275,6 +274,7 @@ HTTP Code
 HTTP Code
   - 200 Found
     {
+      _id,
       name,
       imo,
       mmsi,
@@ -293,6 +293,22 @@ HTTP Code
       home_port,
       licenses: [license_id1, license_id2, license_id3...]
     }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Modify Vessel
+###**PATCH** /vessel/:id?token＝
+####Request
+```
+JSON Patch
+```
+
+####Response
+```
+HTTP Code
+  - 200 OK
   - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
@@ -353,6 +369,7 @@ HTTP Code
 HTTP Code
   - 200 Found
     {
+      _id,
       total: {
         weight,
         counts
@@ -371,3 +388,104 @@ HTTP Code
   - 500 Internal Server Error
 ```
 
+##Modify Catch
+###**PATCH** /catch/:id?token＝
+####Request
+```
+JSON Patch
+```
+
+####Response
+```
+HTTP Code
+  - 200 OK
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+
+#Track
+##Add Track
+###**PUT** /track?token=
+####Request
+```
+{
+  boat,
+  path: [{
+      time,
+      lat,
+      long,
+      speed
+  }],
+  catches: [],
+  start_at,
+  end_at
+}
+```
+
+#Response
+```
+HTTP Code
+  - 201 Created
+  - 400 Bad Request
+  - 500 Internal Server Error
+```
+
+##GET Track List
+###**GET** /track?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {Object},
+        {Object},
+        ...
+        {Object}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##GET One Track
+###**GET** /track/:id?token=
+####Response
+```
+  - 200 Found
+    {
+      _id,
+      boat,
+      path: [{
+        time,
+        lat,
+        long,
+        speed
+      }],
+      catches: [],
+      start_at,
+      end_at
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Modify Track
+###**PATCH** /track/:id?token＝
+####Request
+```
+JSON Patch
+```
+
+####Response
+```
+HTTP Code
+  - 200 OK
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
