@@ -155,7 +155,7 @@ HTTP Code
 ```
 
 ##Modify Profile
-###**PATCH** /profile/:id?=token
+###**PATCH** /profile/:id?token＝
 ####Request
 ```
 [
@@ -169,7 +169,7 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
-  - 401
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
