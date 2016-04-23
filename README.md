@@ -45,6 +45,15 @@ HTTP Code
   - 500 Internal Server Error
 ```
 
+##Logout
+###**DELETE** /auth?token=
+####Response
+```
+  - 200 Found
+  - 401 Unauthorized
+  - 500 Internal Server Error
+```
+
 ##Update Password
 ###**PATCH** /auth/:old_password?token=
 ####Request
