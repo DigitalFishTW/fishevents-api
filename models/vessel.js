@@ -11,7 +11,7 @@ var vesselSchema = mongoose.Schema({
     radio: String,
     flag: String,
     ais_type: String,
-    groo_tinnage: Number,
+    gross_tonnage: Number,
     deadweight: Number,
     length: Number,
     breadth: Number,

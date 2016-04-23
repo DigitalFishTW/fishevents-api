@@ -119,7 +119,7 @@ router.patch('/:id', function (req, res, next) {
     })
     .catch(function (error) {
         if (error.rtpe === "not_found") {
-            return res.status('500').json({error: error.stack ? error.stack: error.toString()});
+            return res.status('404').json({error: error.stack ? error.stack: error.toString()});
         }
         
         return res.status('500').json({error: error.stack ? error.stack: error.toString()});
@@ -144,7 +144,7 @@ router["delete"]('/:id', function (req, res, next) {
     })
     .catch(function(error) {
         if (error.rtpe === "not_found") {
-            return res.status('500').json({error: error.stack ? error.stack: error.toString()});
+            return res.status('404').json({error: error.stack ? error.stack: error.toString()});
         }
         
         return res.status('500').json({error: error.stack ? error.stack: error.toString()});

@@ -49,7 +49,9 @@ router.get('/:id', function (req, res, next) {
     Permit.findById(req.params.id)
     .then(function (doc) {
         if (!doc) {
-            return res.status(404).json({error: 'doc not found'});
+            var error = new Error();
+            error.type = "not_found"
+            throw error
         }
         doc = doc.toObject()
         var temp = {};
@@ -65,6 +67,9 @@ router.get('/:id', function (req, res, next) {
         // return res.json(doc);
     })
     .catch(function (error) {
+        if (error.rtpe === "not_found") {
+            return res.status('404').json({error: error.stack ? error.stack: error.toString()});
+        }
         return res.status('500').json({error: error.toString()});
     })
 });
@@ -119,7 +124,7 @@ router.patch('/:id', function (req, res, next) {
     })
     .catch(function (error) {
         if (error.rtpe === "not_found") {
-            return res.status('500').json({error: error.stack ? error.stack: error.toString()});
+            return res.status('404').json({error: error.stack ? error.stack: error.toString()});
         }
         
         return res.status('500').json({error: error.stack ? error.stack: error.toString()});
