@@ -5,7 +5,11 @@ var salt = require("../config").salt;
 
 var accountSchema = mongoose.Schema({
     username: String,
-    hashed_password: String
+    hashed_password: String,
+    profile: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Profile"
+    }
 });
 
 accountSchema.methods.validPassword = function (password) {

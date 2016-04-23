@@ -1,3 +1,4 @@
+"use strict";
 const express = require("express");
 const config = require("../config");
 
@@ -37,7 +38,7 @@ router.put('/', function (req, res, next) {
         }
         return res.status('500').json({error: err.toString()});
     })
-})
+});
 router.get('/', function (req, res, next) {
     if (!req.query || 'object' !== typeof req.query) {
         console.log(req.query);
@@ -67,5 +68,45 @@ router.get('/', function (req, res, next) {
             return res.status('500').json({error: err.toString()});
         })
       })(req, res, next);
-})
+});
+
+// PATCH Password
+router.patch('/:password', function(req, res) {
+    Session
+        .findOne({
+            token: req.query.token
+        })
+        .then(function(session) {
+            Account
+                .findOne({
+                    username: session.username
+                })
+                .then(function(account) {
+                    if(!account) {
+                        res.status(500);
+                    }
+                    if(!account.validPassword(req.params.password)) {
+                        let err = new Error("password_not_match");
+                        err.type = "password_not_match";
+                        throw err;
+                    }
+                    return account;
+                })
+                .then(function(account) {
+                    account.setPassword(req.body.new_password);
+                    return account.save();
+                })
+                .then(function() {
+                    res.status(200).json({});
+                })
+                .catch(function(err) {
+                    if(err.type == "password_not_match") {
+                        res.status(403).json({ err: "password_not_match"});
+                    } else {
+                        res.status(500).json({ err: err.toString() });
+                    }
+                });
+        });
+});
+
 module.exports = router;

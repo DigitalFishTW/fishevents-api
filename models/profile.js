@@ -1,10 +1,11 @@
 var mongoose = require("mongoose");
 var profileSchema = mongoose.Schema({
-    create_time: Date,
-    last_edit: Date,
-    first_name: String,
-    middle_name: String,
-    last_name: String,
+    type: String,
+    name: {
+        first: String,
+        middle: String,
+        last: String
+    },
     email: String,
     zip: String,
     address: String,

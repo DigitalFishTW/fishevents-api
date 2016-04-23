@@ -13,6 +13,9 @@ const Session = require("./models/session");
 // Load routes
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
+const permit = require("./routes/license");
+const track = require("./routes/track");
+
 const config = require("./config");
 
 var app = express();
@@ -68,7 +71,9 @@ passport.deserializeUser(function(id, done) {
 // CORS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    // Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE
+    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
+    res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type"); 
     next();
 });
 
@@ -79,7 +84,7 @@ app.use(function(req, res, next) {
     Session.findOne({token: req.query.token})
     .then(function (doc) {
         if (!doc) {
-            res.status("401").json({});
+            return res.status("401").json({});
         }
         next();
     })
@@ -89,7 +94,8 @@ app.use(function(req, res, next) {
 });
 
 app.use('/profile', profile);
-
+app.use('/permit', permit);
+app.use('/track', track);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404);
