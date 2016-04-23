@@ -32,7 +32,7 @@ HTTP Code
 ```
 
 ##Get Username
-###**GET** /username
+###**GET** /username?token=
 
 ####Response
 ```
