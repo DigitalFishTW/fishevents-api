@@ -24,11 +24,11 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+    {
+      token
+    }
   - 403 Forbidden
   - 500 Internal Server Error
-{
-  token
-}
 ```
 
 ##Get Username
@@ -38,11 +38,11 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+    {
+      username
+    }
   - 403 Forbidden
   - 500 Internal Server Error
-{
-  username
-}
 ```
 
 ##Update Password
