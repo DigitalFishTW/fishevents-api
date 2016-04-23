@@ -18,14 +18,7 @@ HTTP Code
 ```
 
 ##Login
-###**GET** /auth
-####Request
-```
-{
-  username,
-  password
-}
-```
+###**GET** /auth?username=&password=
 
 ####Response
 ```
@@ -38,14 +31,8 @@ HTTP Code
 }
 ```
 
-##Update Password
-###**PATCH** /auth/:username/:password
-####Request
-```
-[
-  { "op": "replace", "path": "/password", "value": "pw" }
-]
-```
+##Get Username
+###**GET** /username
 
 ####Response
 ```
@@ -53,12 +40,33 @@ HTTP Code
   - 200 Found
   - 403 Forbidden
   - 500 Internal Server Error
+{
+  username
+}
+```
+
+##Update Password
+###**PATCH** /auth/:old_password?token=
+####Request
+```
+{
+  new_password
+}
+```
+
+####Response
+```
+HTTP Code
+  - 200 Found
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
 ```
 
 
 #Profile
 ##Add Profile
-###**PUT** /profile
+###**PUT** /profile?token=
 ####Request
 ```
 {
@@ -67,6 +75,7 @@ HTTP Code
   first_name,
   middle_name,
   last_name,
+  type,
   email,
   zip,
   address,
@@ -85,70 +94,63 @@ HTTP Code
 ```
 HTTP Code
   - 201 Created
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
 
-##Get profile list
-###**GET** /profile
-```
-{
-  offset,
-  limit,
-  fields: [field1, field2, field3...]
-}
-```
-
-
-```
-HTTP Code
-  - 200 Found
-  - 403 Forbidden
-  - 500 Internal Server Error
-{
-  [
-    {id, first_name, middle_name, last_name, [field]},
-    {id, first_name, middle_name, last_name, [field]},
-    ...
-    {id, first_name, middle_name, last_name, [field]}
-  ]
-}
-```
-
-##Get one profile
-###**GET** /profile/:id
-####Response
-```
-{
-  create_time,
-  last_edit,
-  first_name,
-  middle_name,
-  last_name,
-  email,
-  zip,
-  address,
-  city,
-  states,
-  country_code,
-  birth,
-  gender,
-  bio,
-  licenses: [license_id1, license_id2, license_id3...]
-  phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
-}
-```
-
+##Get Profile List
+###**GET** /profile?token=&offset=&limit=&fields=[field1,field2,field3...]
 ####Response
 ```
 HTTP Code
   - 200 Found
+    {
+      [
+        {id, first_name, middle_name, last_name, type, [field]},
+        {id, first_name, middle_name, last_name, type, [field]},
+        ...
+        {id, first_name, middle_name, last_name, type, [field]}
+      ]
+    }
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
 
-##Modify profile
-###**PATCH** /profile/:id
+##Get One Profile
+###**GET** /profile/:id?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      create_time,
+      last_edit,
+      first_name,
+      middle_name,
+      last_name,
+      type,
+      email,
+      zip,
+      address,
+      city,
+      states,
+      country_code,
+      birth,
+      gender,
+      bio,
+      licenses: [license_id1, license_id2, license_id3...]
+      phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Modify Profile
+###**PATCH** /profile/:id?token＝
+####Request
 ```
 [
   { "op": "replace", "path": "/baz", "value": "boo" },
@@ -157,4 +159,95 @@ HTTP Code
 ]
 ```
 
+####Response
+```
+HTTP Code
+  - 200 Found
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
 
+#Vessel
+##Add New Vessel
+###**PUT** /vessel?token=
+####Request
+```
+{
+  name,
+  imo,
+  mmsi,
+  identify,
+  gears: [gear1, gear2, gear3...],
+  chars: [char1, char2, char3...],
+  radio,
+  flag,
+  ais_type,
+  groo_tinnage,
+  deadweight,
+  length,
+  breadth,
+  year,
+  status,
+  home_port,
+  licenses: [license_id1, license_id2, license_id3...]
+}
+```
+
+####Response
+```
+HTTP Code
+  - 201 Created
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Get Vessel List
+###**GET** /vessel?token=&offset=&limit=&fields=[field1,field2,field3...]
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {id, imo, mmsi, identify, radio, ais_type, [field]},
+        {id, imo, mmsi, identify, radio, ais_type, [field]},
+        ...
+        {id, imo, mmsi, identify, radio, ais_type, [field]}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Get One Vessel Profile
+###**GET** /vessel/:id?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      name,
+      imo,
+      mmsi,
+      identify,
+      gears: [gear1, gear2, gear3...],
+      chars: [char1, char2, char3...],
+      radio,
+      flag,
+      ais_type,
+      groo_tinnage,
+      deadweight,
+      length,
+      breadth,
+      year,
+      status,
+      home_port,
+      licenses: [license_id1, license_id2, license_id3...]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
