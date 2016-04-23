@@ -58,6 +58,7 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
@@ -92,6 +93,7 @@ HTTP Code
 ```
 HTTP Code
   - 201 Created
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
@@ -110,46 +112,44 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+    {
+      [
+        {id, first_name, middle_name, last_name, [field]},
+        {id, first_name, middle_name, last_name, [field]},
+        ...
+        {id, first_name, middle_name, last_name, [field]}
+      ]
+    }
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
-{
-  [
-    {id, first_name, middle_name, last_name, [field]},
-    {id, first_name, middle_name, last_name, [field]},
-    ...
-    {id, first_name, middle_name, last_name, [field]}
-  ]
-}
 ```
 
 ##Get One Profile
 ###**GET** /profile/:id?token=
 ####Response
 ```
-{
-  create_time,
-  last_edit,
-  first_name,
-  middle_name,
-  last_name,
-  email,
-  zip,
-  address,
-  city,
-  states,
-  country_code,
-  birth,
-  gender,
-  bio,
-  licenses: [license_id1, license_id2, license_id3...]
-  phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
-}
-```
-
-####Response
-```
 HTTP Code
   - 200 Found
+    {
+      create_time,
+      last_edit,
+      first_name,
+      middle_name,
+      last_name,
+      email,
+      zip,
+      address,
+      city,
+      states,
+      country_code,
+      birth,
+      gender,
+      bio,
+      licenses: [license_id1, license_id2, license_id3...]
+      phones: [{title1, phone1}, {title2, phone2}, {title3, phoen3}...]
+    }
+  - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
 ```
@@ -169,6 +169,41 @@ HTTP Code
 ```
 HTTP Code
   - 200 Found
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+#Vessel
+##Add New Vessel
+###**PUT** /vessel?token=
+####Request
+```
+{
+  name,
+  imo,
+  mmsi,
+  identify,
+  gears: [gear1, gear2, gear3...],
+  chars: [char1, char2, char3...],
+  radio,
+  flag,
+  ais_type,
+  groo_tinnage,
+  deadweight,
+  length,
+  breadth,
+  year,
+  status,
+  home_port,
+  licenses: [license_id1, license_id2, license_id3...]
+}
+```
+
+####Response
+```
+HTTP Code
+  - 201 Created
   - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
