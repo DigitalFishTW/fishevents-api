@@ -18,14 +18,7 @@ HTTP Code
 ```
 
 ##Login
-###**GET** /auth
-####Request
-```
-{
-  username,
-  password
-}
-```
+###**GET** /auth?username=&password=
 
 ####Response
 ```
@@ -38,8 +31,22 @@ HTTP Code
 }
 ```
 
+##Get Username
+###**GET** /username
+
+####Response
+```
+HTTP Code
+  - 200 Found
+  - 403 Forbidden
+  - 500 Internal Server Error
+{
+  username
+}
+```
+
 ##Update Password
-###**PATCH** /auth/:username/:password
+###**PATCH** /auth/:password?token=
 ####Request
 ```
 [
@@ -58,7 +65,7 @@ HTTP Code
 
 #Profile
 ##Add Profile
-###**PUT** /profile
+###**PUT** /profile?token=
 ####Request
 ```
 {
@@ -89,8 +96,8 @@ HTTP Code
   - 500 Internal Server Error
 ```
 
-##Get profile list
-###**GET** /profile
+##Get Profile List
+###**GET** /profile?token=
 ```
 {
   offset,
@@ -115,8 +122,8 @@ HTTP Code
 }
 ```
 
-##Get one profile
-###**GET** /profile/:id
+##Get One Profile
+###**GET** /profile/:id?token=
 ####Response
 ```
 {
@@ -147,8 +154,9 @@ HTTP Code
   - 500 Internal Server Error
 ```
 
-##Modify profile
-###**PATCH** /profile/:id
+##Modify Profile
+###**PATCH** /profile/:id?=token
+####Request
 ```
 [
   { "op": "replace", "path": "/baz", "value": "boo" },
@@ -157,4 +165,12 @@ HTTP Code
 ]
 ```
 
+####Response
+```
+HTTP Code
+  - 200 Found
+  - 401
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
 
