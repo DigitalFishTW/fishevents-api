@@ -320,6 +320,7 @@ HTTP Code
 ####Resquest
 ```
 {
+    date,
     total: {
         weight,
         counts
@@ -370,6 +371,7 @@ HTTP Code
   - 200 Found
     {
       _id,
+      date,
       total: {
         weight,
         counts
@@ -433,7 +435,7 @@ HTTP Code
 ```
 
 ##GET Track List
-###**GET** /track?token=
+###**GET** /track?token=&offset=&limit=
 ####Response
 ```
 HTTP Code
@@ -514,7 +516,7 @@ HTTP Code
 ```
 
 ##GET Permit List
-###**GET** /permit?token=
+###**GET** /permit?token=&offset=&limit=
 ####Response
 ```
 HTTP Code
@@ -561,6 +563,62 @@ JSON Patch
 ```
 HTTP Code
   - 200 OK
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+#Fish
+##Add Fish Speice
+###**PUT** /fish?token=
+####Resquest
+```
+{
+  sn,
+  name: [name_cht, name_eng...],
+  chars: [char1, char2, char3...],
+  intro
+}
+```
+
+####Response
+```
+HTTP Code
+  - 201 Created
+  - 400 Bad Request
+  - 500 Internal Server Error
+```
+
+##Get Fish List
+###**GET** /fish?token=&offset=&limit=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {Object},
+        {Object},
+        ...
+        {Object}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##GET One Fish
+###**GET** /fish/:id?token=
+####Response
+```
+  - 200 Found
+    {
+      sn,
+      name: [name_cht, name_eng...],
+      chars: [char1, char2, char3...],
+      intro
+    }
   - 401 Unauthorized
   - 403 Forbidden
   - 500 Internal Server Error
