@@ -16,13 +16,16 @@ router.put('/', function (req, res, next) {
     if (!req.body || 'object' !== typeof req.body) {
         res.status(400).json({error: 'bad format'})
     }
+    var missedField = null;
     if (!mustHave.reduce(function (all, curr) {
         if (null == req.body[curr]) {
+            missedField = curr;
             return false;
+        } else {
+            return all
         }
-        return true;
     }, true)) {
-        res.status(400).json({error: 'missing field'});
+        res.status(400).json({error: 'missing field ' + missedField});
     }
     var dataObj = {
         meta: {}

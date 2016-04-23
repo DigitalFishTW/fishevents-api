@@ -109,4 +109,34 @@ router.patch('/:password', function(req, res) {
         });
 });
 
+router['delete']('/', function(req, res, next) {
+    Session.findOne({token: req.query.token})
+    .then(function (doc) {
+        if (!doc) {
+            return res.status("401").json({});
+        }
+        next();
+    })
+    .catch(function (err) {
+        res.status("500").json({error: err.toString()});
+    })
+}, function (req, res, next) {
+    var token = req.query.token;
+    Session.findOne({
+        token: token
+    })
+    .then(function(doc) {
+        if (!doc) {
+            return res.status(404).json({})
+        }
+        return doc.remove()
+    })
+    .then(function() {
+        return res.json({});
+    })
+    .catch(function(err) {
+        return res.status(500).json({err: err.toString()})
+    })
+})
+
 module.exports = router;

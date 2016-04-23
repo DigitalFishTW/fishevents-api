@@ -17,6 +17,8 @@ const permit = require("./routes/license");
 const track = require("./routes/track");
 const fishCatch = require("./routes/catch");
 const vessel = require("./routes/vessel");
+const username = require("./routes/username");
+const search = require("./routes/search");
 
 const config = require("./config");
 
@@ -100,10 +102,13 @@ app.use('/permit', permit);
 app.use('/track', track);
 app.use('/catch', fishCatch);
 app.use('/vessel', vessel);
+app.use('/username', username);
+app.use('/search', search);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.status(404);
+  res.status(404).json({err: "not_found"});
 });
 
 // error handlers
