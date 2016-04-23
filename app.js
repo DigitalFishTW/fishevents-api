@@ -15,6 +15,8 @@ const auth = require("./routes/auth");
 const profile = require("./routes/profile");
 const permit = require("./routes/license");
 const track = require("./routes/track");
+const fishCatch = require("./routes/catch");
+const vessel = require("./routes/vessel");
 
 const config = require("./config");
 
@@ -96,6 +98,9 @@ app.use(function(req, res, next) {
 app.use('/profile', profile);
 app.use('/permit', permit);
 app.use('/track', track);
+app.use('/catch', fishCatch);
+app.use('/vessel', vessel);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404);
