@@ -100,16 +100,7 @@ HTTP Code
 ```
 
 ##Get Profile List
-###**GET** /profile?token=
-####Request
-```
-{
-  offset,
-  limit,
-  fields: [field1, field2, field3...]
-}
-```
-
+###**GET** /profile?token=&offset=&limit=&fields=[field1,field2,field3...]
 ####Response
 ```
 HTTP Code
@@ -213,16 +204,7 @@ HTTP Code
 ```
 
 ##Get Vessel List
-###**GET** /vessel?token=
-####Request
-```
-{
-  offset,
-  limit,
-  fields: [field1, field2, field3...]
-}
-```
-
+###**GET** /vessel?token=&offset=&limit=&fields=[field1,field2,field3...]
 ####Response
 ```
 HTTP Code
