@@ -49,9 +49,9 @@ HTTP Code
 ###**PATCH** /auth/:old_password?token=
 ####Request
 ```
-[
-  { "op": "replace", "path": "/password", "value": "new_password" }
-]
+{
+  new_password
+}
 ```
 
 ####Response
