@@ -72,9 +72,11 @@ HTTP Code
 {
   create_time,
   last_edit,
-  first_name,
-  middle_name,
-  last_name,
+  name: {
+    first,
+    middle,
+    last
+  },
   type,
   email,
   zip,
@@ -107,10 +109,10 @@ HTTP Code
   - 200 Found
     {
       [
-        {id, first_name, middle_name, last_name, type, [field]},
-        {id, first_name, middle_name, last_name, type, [field]},
+        {id, name: {first, middle, last}, type, [field]},
+        {id, name: {first, middle, last}, type, [field]},
         ...
-        {id, first_name, middle_name, last_name, type, [field]}
+        {id, name: {first, middle, last}, type, [field]}
       ]
     }
   - 401 Unauthorized
@@ -127,9 +129,11 @@ HTTP Code
     {
       create_time,
       last_edit,
-      first_name,
-      middle_name,
-      last_name,
+      name: {
+        first,
+        middle,
+        last
+      },
       type,
       email,
       zip,
@@ -157,9 +161,11 @@ HTTP Code
     {
       create_time,
       last_edit,
-      first_name,
-      middle_name,
-      last_name,
+      name: {
+        first,
+        middle,
+        last
+      },
       type,
       email,
       zip,
