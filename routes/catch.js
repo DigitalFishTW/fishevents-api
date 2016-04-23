@@ -9,7 +9,8 @@ var mustHave = [
     "total",
     "selling",,
     "permit",
-    "species"
+    "species",
+    "date"
 ]
     
 router.put('/', function (req, res, next) {

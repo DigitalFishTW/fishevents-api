@@ -27,7 +27,8 @@ var catchSchema = Schema({
         sold: Number,
         pricing: Number
     },
-    meta: {}
+    meta: {},
+    date: Date
 });
 
 var Catch = mongoose.model('Catch', catchSchema);
