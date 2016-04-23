@@ -320,6 +320,7 @@ HTTP Code
 ####Resquest
 ```
 {
+    date,
     total: {
         weight,
         counts
@@ -370,6 +371,7 @@ HTTP Code
   - 200 Found
     {
       _id,
+      date,
       total: {
         weight,
         counts
