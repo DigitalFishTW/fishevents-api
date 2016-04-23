@@ -75,6 +75,7 @@ HTTP Code
   first_name,
   middle_name,
   last_name,
+  type,
   email,
   zip,
   address,
@@ -115,10 +116,10 @@ HTTP Code
   - 200 Found
     {
       [
-        {id, first_name, middle_name, last_name, [field]},
-        {id, first_name, middle_name, last_name, [field]},
+        {id, first_name, middle_name, last_name, type, [field]},
+        {id, first_name, middle_name, last_name, type, [field]},
         ...
-        {id, first_name, middle_name, last_name, [field]}
+        {id, first_name, middle_name, last_name, type, [field]}
       ]
     }
   - 401 Unauthorized
@@ -138,6 +139,7 @@ HTTP Code
       first_name,
       middle_name,
       last_name,
+      type,
       email,
       zip,
       address,
