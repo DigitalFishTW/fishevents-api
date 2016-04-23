@@ -100,6 +100,7 @@ HTTP Code
 
 ##Get Profile List
 ###**GET** /profile?token=
+####Request
 ```
 {
   offset,
@@ -108,7 +109,7 @@ HTTP Code
 }
 ```
 
-
+####Response
 ```
 HTTP Code
   - 200 Found
@@ -209,3 +210,60 @@ HTTP Code
   - 500 Internal Server Error
 ```
 
+##Get Vessel List
+###**GET** /vessel?token=
+####Request
+```
+{
+  offset,
+  limit,
+  fields: [field1, field2, field3...]
+}
+```
+
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      [
+        {id, imo, mmsi, identify, radio, ais_type, [field]},
+        {id, imo, mmsi, identify, radio, ais_type, [field]},
+        ...
+        {id, imo, mmsi, identify, radio, ais_type, [field]}
+      ]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
+
+##Get One Vessel Profile
+###**GET** /vessel/:id?token=
+####Response
+```
+HTTP Code
+  - 200 Found
+    {
+      name,
+      imo,
+      mmsi,
+      identify,
+      gears: [gear1, gear2, gear3...],
+      chars: [char1, char2, char3...],
+      radio,
+      flag,
+      ais_type,
+      groo_tinnage,
+      deadweight,
+      length,
+      breadth,
+      year,
+      status,
+      home_port,
+      licenses: [license_id1, license_id2, license_id3...]
+    }
+  - 401 Unauthorized
+  - 403 Forbidden
+  - 500 Internal Server Error
+```
